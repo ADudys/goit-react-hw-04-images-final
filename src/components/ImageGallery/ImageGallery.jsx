@@ -73,10 +73,11 @@ export default class ImageGallery extends Component {
               />
             ))}
           </ul>
-          {this.state.images.length !== 0 ? (
+          {this.state.images.length >= 12 && (
             <Button onClick={this.props.loadMoreBtn} />
-          ) : (
-            alert('No results')
+          )}
+          {this.state.images.length === 0 && (
+            <p>Sorry, there are no matching images...</p>
           )}
         </>
       );
