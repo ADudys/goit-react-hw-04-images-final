@@ -1,47 +1,44 @@
-import PropTypes from 'prop-types';
 import { Component } from 'react';
 import css from './Searchbar.module.css';
-import Notiflix from 'notiflix';
-import { notifySettings } from 'fetch';
+import { AiOutlineSearch } from 'react-icons/ai';
 
-export class Searchbar extends Component {
+export default class Searchbar extends Component {
   state = {
-    query: '',
+    input: '',
   };
-  onInputChange = event => {
-    const query = event.currentTarget.value;
-    this.setState({ query: query });
+
+  search = e => {
+    e.preventDefault();
+    this.props.getInputValue(this.state.input);
+    this.setState({ input: '' });
   };
-  handleSubmit = event => {
-    event.preventDefault();
-    if (this.state.query.trim() === '') {
-      return Notiflix.Notify.warning('Please enter key words', notifySettings);
-    }
-    this.props.onSubmit(this.state);
-    this.setState({ query: '' });
+
+  handleChange = e => {
+    this.setState({ input: e.target.value });
   };
+
   render() {
     return (
-      <section>
-        <header className={css.searchbar__header}>
-          <form className={css.searchbar__form}>
-            <button type="submit" className={css.searchbar__btn}>
-              <span className={css.searchbar__label}>Search</span>
-            </button>
-            <input
-              className={css.searchbar__input}
-              value={this.state.query}
-              name="query"
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-              onChange={this.onInputChange}
-              required
-            />
-          </form>
-        </header>
-      </section>
+      <header className={css.searchbar}>
+        <form className={css.form} onSubmit={this.search}>
+          <button type="submit" className={css.form__btn}>
+            <span className={css.form__label}>
+              <AiOutlineSearch />
+            </span>
+          </button>
+
+          <input
+            name="input"
+            type="text"
+            autoComplete="off"
+            onChange={this.handleChange}
+            value={this.state.input}
+            autoFocus
+            placeholder="Search images and photos"
+            className={css.form__input}
+          />
+        </form>
+      </header>
     );
   }
 }

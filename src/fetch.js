@@ -1,22 +1,8 @@
-export const notifySettings = {
-  width: '380px',
-  position: 'right-top',
-  distance: '10px',
-  opacity: 1,
-  fontSize: '20px',
-  borderRadius: '12px',
-};
-
-export async function fetchData(searchQuery, page) {
+export default async function getImages(inputValue, page = 1) {
+  const url = 'https://pixabay.com/api/';
   const API_KEY = '38310321-42cf4e8d1a5fc0af5b641205e';
 
-  const searchParams = new URLSearchParams({
-    key: API_KEY,
-    q: searchQuery,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-    page: page,
-    per_page: 12,
-  });
+  return await fetch(
+    `${url}?q=${inputValue}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
+  ).then(res => res.json());
 }
