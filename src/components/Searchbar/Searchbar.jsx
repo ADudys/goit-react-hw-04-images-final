@@ -22,9 +22,9 @@ export default class Searchbar extends Component {
       <header className={css.searchbar}>
         <form className={css.form} onSubmit={this.search}>
           <button type="submit" className={css.form__btn}>
-            <span className={css.form__label}>
-              <AiOutlineSearch size={20} />
-            </span>
+           
+              <AiOutlineSearch className={css.form__label} size={20} color="black" />
+        
           </button>
 
           <input
