@@ -23,7 +23,7 @@ export default class Searchbar extends Component {
         <form className={css.form} onSubmit={this.search}>
           <button type="submit" className={css.form__btn}>
             <span className={css.form__label}>
-              <AiOutlineSearch />
+              <AiOutlineSearch size={20} />
             </span>
           </button>
 
