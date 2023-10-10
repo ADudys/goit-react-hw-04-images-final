@@ -9,6 +9,7 @@ export class App extends Component {
     modalImg: '',
     showModal: false,
     page: 1,
+   
   };
 
   getInputValue = handleValue => {

@@ -15,6 +15,8 @@ export default class ImageGallery extends Component {
   state = {
     images: [],
     status: 'idle',
+    totalHits: 0,
+    totalHits: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,6 +37,7 @@ export default class ImageGallery extends Component {
         this.setState({
           images: response.hits,
           status: 'resolve',
+          totalHits: response.totalHits,
         });
       })
       .catch(error => this.setState({ status: 'error' }));
@@ -73,7 +76,7 @@ export default class ImageGallery extends Component {
               />
             ))}
           </ul>
-          {this.state.images.length >= 12 && (
+          {this.state.images.length < this.state.totalHits && (
             <Button onClick={this.props.loadMoreBtn} />
           )}
           {this.state.images.length === 0 && (
