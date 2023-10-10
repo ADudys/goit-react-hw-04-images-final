@@ -16,7 +16,6 @@ export default class ImageGallery extends Component {
     images: [],
     status: 'idle',
     totalHits: 0,
-    totalHits: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
