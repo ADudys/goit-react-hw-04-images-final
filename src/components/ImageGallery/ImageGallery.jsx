@@ -52,7 +52,7 @@ export default class ImageGallery extends Component {
           status: 'resolve',
         }));
       })
-      .catch(error => this.setState({ status: 'error' }));
+      .catch(() => this.setState({ status: 'error' }));
   };
 
   render() {
