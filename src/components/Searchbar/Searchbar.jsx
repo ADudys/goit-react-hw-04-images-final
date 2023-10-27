@@ -1,8 +1,57 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './Searchbar.module.css';
 import { AiOutlineSearch } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
+export default function Searchbar({ onSubmit }) {
+  const [value, setValue] = useState('');
+
+  const handleChange = ({ target }) => {
+    setValue(target.value.toLowerCase());
+  };
+
+  const onFormSubmit = event => {
+    event.preventDefault();
+
+    if (value.trim() === '') {
+      return alert('Please enter key words for search', {});
+    }
+
+    onSubmit(value);
+    setValue('');
+  };
+
+  return (
+    <header className={css.searchbar}>
+      <form onSubmit={onFormSubmit} className={css.form}>
+        <button type="submit" className={css.form__btn}>
+          <AiOutlineSearch
+            className={css.form__label}
+            size={20}
+            color="black"
+          />
+        </button>
+
+        <input
+          value={value}
+          onChange={handleChange}
+          type="text"
+          autoComplete="off"
+          placeholder="Search images and photos"
+          name="search"
+          className={css.form__input}
+          autoFocus
+        />
+      </form>
+    </header>
+  );
+}
+
+PropTypes.Searchbar = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+/*
 export default class Searchbar extends Component {
   state = {
     input: '',
@@ -23,11 +72,9 @@ export default class Searchbar extends Component {
       <header className={css.searchbar}>
         <form className={css.form} onSubmit={this.search}>
           <button type="submit" className={css.form__btn}>
-            <AiOutlineSearch
-              className={css.form__label}
-              size={20}
-              color="black"
-            />
+           
+              <AiOutlineSearch className={css.form__label} size={20} color="black" />
+        
           </button>
 
           <input
@@ -45,7 +92,4 @@ export default class Searchbar extends Component {
     );
   }
 }
-
-Searchbar.propTypes = {
-  getInputValue: PropTypes.func.isRequired,
-};
+*/
